@@ -20,7 +20,7 @@ function App() {
       })
         .then(res => res.json())
         .then(data => {
-          setTodolist(data);
+          setTodolist(data.data);
         });
 
       setIsLoading(false);
