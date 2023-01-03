@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LOGIN, SIGN } from '../../pages/AuthPage.jsx';
 import * as Styled from './Styled.jsx';
 
 export function Sign({ setAuthMethod }) {
-  const [loginState, setLoginState] = useState({
+  const navigate = useNavigate();
+
+  const [signState, setSignState] = useState({
     email: '',
     password: '',
   });
@@ -33,8 +36,8 @@ export function Sign({ setAuthMethod }) {
         : '@ 또는 .이 들어간 이메일 형식이어야 합니다!',
     });
 
-    setLoginState({
-      ...loginState,
+    setSignState({
+      ...signState,
       email: value,
     });
   };
@@ -49,10 +52,35 @@ export function Sign({ setAuthMethod }) {
         value.length >= 8 ? '올바른 형식입니다!' : '8자리 이상 입력해주세요!',
     });
 
-    setLoginState({
-      ...loginState,
+    setSignState({
+      ...signState,
       password: value,
     });
+  };
+
+  const onSubmitSign = async event => {
+    event.preventDefault();
+
+    await fetch('http://localhost:8080/users/create', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: signState.email,
+        password: signState.password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) {
+          alert(data.message);
+
+          localStorage.setItem('user', data.token);
+
+          navigate('/');
+        } else alert(data.details);
+      });
   };
 
   useEffect(() => {
@@ -62,12 +90,12 @@ export function Sign({ setAuthMethod }) {
   }, [emailVaild.isValid, passwordVaild.isValid]);
 
   return (
-    <Styled.Form>
+    <Styled.Form onSubmit={onSubmitSign}>
       <Styled.Title>Sign</Styled.Title>
       <Styled.AuthInput
         type="text"
         placeholder="이메일 형식의 아이디를 입력해주세요."
-        value={loginState.email}
+        value={signState.email}
         onChange={onHandlerChangeEmail}
       />
       <Styled.EmailValidText isValid={emailVaild.isValid}>
@@ -76,7 +104,7 @@ export function Sign({ setAuthMethod }) {
       <Styled.AuthInput
         type="password"
         placeholder="8자리 이상의 비밀번호를 입력해주세요."
-        value={loginState.password}
+        value={signState.password}
         onChange={onHandlerChangePassword}
       />
       <Styled.PasswordValidText isValid={passwordVaild.isValid}>
