@@ -10,4 +10,6 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  box-shadow: 0 7px 29px 0 hsl(240deg 5% 41% / 20%);
 `;
