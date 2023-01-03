@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN, SIGN } from '../../pages/AuthPage.jsx';
+import { BASE_URL } from '../../router/Router.jsx';
 import * as Styled from './Styled.jsx';
 
 export function Sign({ setAuthMethod }) {
@@ -78,7 +79,7 @@ export function Sign({ setAuthMethod }) {
 
           localStorage.setItem('user', data.token);
 
-          navigate('/');
+          navigate(BASE_URL);
         } else alert(data.details);
       });
   };
