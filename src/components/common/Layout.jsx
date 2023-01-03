@@ -4,7 +4,7 @@ export const Layout = ({ children }) => {
   return <Container>{children}</Container>;
 };
 
-export const Container = styled.section`
+export const Container = styled.div`
   width: 30rem;
   height: 100%;
 
