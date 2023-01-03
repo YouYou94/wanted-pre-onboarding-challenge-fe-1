@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LOGIN, SIGN } from '../../pages/AuthPage.jsx';
 import * as Styled from './Styled.jsx';
 
 export function Login({ setAuthMethod }) {
+  const navigate = useNavigate();
+
   const [loginState, setLoginState] = useState({
     email: '',
     password: '',
@@ -55,6 +58,31 @@ export function Login({ setAuthMethod }) {
     });
   };
 
+  const onSubmitLogin = async event => {
+    event.preventDefault();
+
+    await fetch('http://localhost:8080/users/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: loginState.email,
+        password: loginState.password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) {
+          alert(data.message);
+
+          localStorage.setItem('user', data.token);
+
+          navigate('/');
+        } else alert(data.details);
+      });
+  };
+
   useEffect(() => {
     if (emailVaild.isValid === true && passwordVaild.isValid === true)
       setIsDisable(false);
@@ -62,7 +90,7 @@ export function Login({ setAuthMethod }) {
   }, [emailVaild.isValid, passwordVaild.isValid]);
 
   return (
-    <Styled.Form>
+    <Styled.Form onSubmit={onSubmitLogin}>
       <Styled.Title>Login</Styled.Title>
       <Styled.AuthInput
         type="text"
