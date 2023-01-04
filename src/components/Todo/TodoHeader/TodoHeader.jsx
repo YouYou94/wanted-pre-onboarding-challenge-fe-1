@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../../router/Router.jsx';
 import * as Styled from './Styled.jsx';
 
 export function TodoHeader() {
@@ -10,7 +11,7 @@ export function TodoHeader() {
 
       localStorage.clear();
 
-      navigate('/auth');
+      navigate(`${BASE_URL}/auth`);
     }
   };
 
