@@ -1,10 +1,10 @@
-import { Layout, TodoContent, TodoHeader } from '../components';
+import { TodoLayout, TodoContent, TodoHeader } from '../components';
 
 export function TodoPage() {
   return (
-    <Layout>
+    <TodoLayout>
       <TodoHeader />
       <TodoContent />
-    </Layout>
+    </TodoLayout>
   );
 }

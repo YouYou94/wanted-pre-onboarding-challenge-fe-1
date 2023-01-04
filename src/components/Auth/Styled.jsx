@@ -7,10 +7,12 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  margin 2rem;
 `;
 
 export const Title = styled.h1`
-  margin: 1.5rem;
+  margin-bottom: 1.5rem;
 
   font-size: 2rem;
 
