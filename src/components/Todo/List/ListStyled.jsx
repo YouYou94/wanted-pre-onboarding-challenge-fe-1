@@ -83,6 +83,27 @@ export const ListItem = styled.div`
   cursor: pointer;
 `;
 
+export const ItemTitle = styled.h3``;
+
+export const ItemDeleteButton = styled.button`
+  width: 5rem;
+
+  border: none;
+
+  border-radius: 1rem;
+
+  background-color: rgb(85, 85, 255);
+  color: white;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(252, 101, 101);
+  }
+`;
+
 /* Modal Styled */
 export const ModalBox = styled.div`
   position: absolute;
