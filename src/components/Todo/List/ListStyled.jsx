@@ -83,7 +83,7 @@ export const ListItem = styled.div`
   cursor: pointer;
 `;
 
-/* Add Feature */
+/* Modal Styled */
 export const ModalBox = styled.div`
   position: absolute;
 
@@ -98,6 +98,7 @@ export const ModalBox = styled.div`
   align-items: center;
 
   padding: 2rem;
+  border-bottom: 1px solid rgb(204, 204, 204);
 
   background-color: rgb(250, 250, 250);
 
@@ -112,7 +113,7 @@ export const TitleInput = styled.input`
   width: 25rem;
   height: 2rem;
 
-  border: 1px solid black;
+  border: 1px solid rgb(204, 204, 204);
   padding: 0 0.5rem;
 
   font-size: 1rem;
@@ -127,6 +128,7 @@ export const ContentArea = styled.textarea`
   height: 10rem;
 
   padding: 0.5rem;
+  border: 1px solid rgb(204, 204, 204);
 
   font-size: 0.8rem;
 
