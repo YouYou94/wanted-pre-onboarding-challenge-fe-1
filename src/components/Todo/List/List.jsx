@@ -12,6 +12,8 @@ import {
   ModalButtonBox,
   ModalButton,
   ListItem,
+  ItemTitle,
+  ItemDeleteButton,
 } from './ListStyled';
 
 export function List() {
@@ -64,6 +66,22 @@ export function List() {
     setChange(change + 1);
   };
 
+  // to do list 삭제하기
+  const onHandlerClickDelete = async event => {
+    const { id } = event.target;
+
+    await fetch(`http://localhost:8080/todos/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: loginToken,
+      },
+    })
+      .then(res => res.json())
+      .catch(error => console.log(`Error: ${error}`));
+
+    setChange(change + 1);
+  };
+
   useEffect(() => {
     getTodo();
   }, [change]);
@@ -110,9 +128,16 @@ export function List() {
           </ModalButtonBox>
         </ModalBox>
         {list.map(item => {
-          const { title } = item;
+          const { title, id } = item;
 
-          return <ListItem key={nanoid()}>{title}</ListItem>;
+          return (
+            <ListItem key={nanoid()}>
+              <ItemTitle>{title}</ItemTitle>
+              <ItemDeleteButton id={id} onClick={onHandlerClickDelete}>
+                삭제
+              </ItemDeleteButton>
+            </ListItem>
+          );
         })}
       </ListBox>
     </ListContainer>
