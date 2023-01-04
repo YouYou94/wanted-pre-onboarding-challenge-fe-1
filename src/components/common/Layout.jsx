@@ -18,6 +18,8 @@ export const AuthContainer = styled.div`
 `;
 
 export const TodoContainer = styled.div`
+  width: 100%;
+
   flex: 1;
 
   display: flex;
